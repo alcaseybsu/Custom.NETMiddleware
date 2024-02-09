@@ -1,3 +1,5 @@
+using Web.Middleware;
+
 namespace Web;
 
 public class Program
@@ -7,7 +9,10 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         var app = builder.Build();
 
-        app.MapGet("/", () => "Hello World!");
+        // register custom middleware
+        app.UseAuthMiddleware();
+
+        app.MapGet("/", () => "Authorized!");
 
         app.Run();
     }
